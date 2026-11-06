@@ -48,3 +48,4 @@ Run the focused contract suites while implementing, then run the complete suites
 - Backend build command: `npm run build --prefix octofit-tracker/backend` checks TypeScript types. Passed.
 - Frontend build command: `npm run build --prefix octofit-tracker/frontend` checks TypeScript and creates the production Vite bundle. Passed.
 - Full backend suite: `npm test --prefix octofit-tracker/backend` passed (9 tests).
+- Seed idempotency: Ran `npm run seed --prefix octofit-tracker/backend` twice against the configured MongoDB instance; both runs passed.
