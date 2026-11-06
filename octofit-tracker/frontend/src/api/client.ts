@@ -3,6 +3,10 @@ export const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefin
 
 export async function getJson<T>(path: string): Promise<T> {
   const response = await fetch(`${apiBaseUrl}${path}`);
-  if (!response.ok) throw new Error(`Request failed with ${response.status}`);
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({})) as { message?: unknown; error?: unknown };
+    const message = typeof body.message === 'string' ? body.message : typeof body.error === 'string' ? body.error : `Request failed with ${response.status}`;
+    throw new Error(message);
+  }
   return response.json() as Promise<T>;
 }
